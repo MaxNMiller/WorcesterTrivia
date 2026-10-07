@@ -1,0 +1,23 @@
+import "react-native-url-polyfill/auto";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY;
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  // Loud in dev, but never crashes the app - questionsService falls back
+  // to cached/bundled data when the client can't reach Supabase anyway.
+  console.warn(
+    "Missing EXPO_PUBLIC_SUPABASE_URL / EXPO_PUBLIC_SUPABASE_ANON_KEY. " +
+      "Copy .env.example to .env and fill in your Supabase project values."
+  );
+}
+
+export const supabase = createClient(supabaseUrl ?? "", supabaseAnonKey ?? "", {
+  auth: {
+    storage: AsyncStorage,
+    persistSession: false,
+    autoRefreshToken: false,
+  },
+});

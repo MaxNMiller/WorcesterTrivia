@@ -8,21 +8,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Mirrors the felt/brass/parchment palette from the existing web app
-        // (TriviaGame.jsx / worcester-pursuit.html) so ported components can
-        // reuse the same utility-class names.
-        felt: {
-          1: "#234a3a",
-          2: "#163025",
-          3: "#0f231b",
-        },
-        parchment: "#f3e9d2",
-        "parchment-soft": "#faf4e6",
-        ink: "#241a10",
-        brass: {
-          DEFAULT: "#c9973f",
-          dark: "#b5852f",
-        },
+        // Brand palette - same token names as the web app's index.css
+        // @theme block, so ported components can reuse the same classes.
+        // Raw hex values for SVG/icons live in src/theme/colors.ts.
+        "worcester-red": "#E3202C",
+        brick: "#B5121D",
+        ink: "#1D1B1A",
+        bone: "#FAF9F7",
+        charcoal: "#2A2726",
+        slate: "#3A3634",
+        stone: "#A39D98",
+        correct: "#3FA66B",
+        incorrect: "#B5121D",
+        gold: "#E8B04B",
       },
     },
   },

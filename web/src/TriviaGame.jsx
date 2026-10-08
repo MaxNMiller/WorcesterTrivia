@@ -11,42 +11,90 @@ import {
   RotateCcw,
   PartyPopper,
   Flame,
+  Lightbulb,
 } from "lucide-react";
+import logo from "./assets/worcester-trivia-logo.png";
 
 const CATEGORIES = [
-  { key: "culture", name: "Culture, Recreation & Education", hex: "#f472b6", bg: "bg-pink-400", text: "text-white", icon: Palette },
-  { key: "potpourri", name: "Potpourri", hex: "#8b4513", bg: "bg-[#8b4513]", text: "text-white", icon: Sparkles },
-  { key: "history", name: "History", hex: "#facc15", bg: "bg-yellow-400", text: "text-[#241a10]", icon: Landmark },
-  { key: "famous", name: "Famous People & Events", hex: "#22c55e", bg: "bg-green-500", text: "text-white", icon: Users },
-  { key: "geography", name: "Geography", hex: "#3b82f6", bg: "bg-blue-500", text: "text-white", icon: Globe },
-  { key: "business", name: "Business & Industry", hex: "#f97316", bg: "bg-orange-500", text: "text-white", icon: Briefcase },
+  { key: "culture", name: "Culture, Recreation & Education", hex: "#C73A80", textHex: "#FFFFFF", icon: Palette },
+  { key: "potpourri", name: "Potpourri", hex: "#7349B8", textHex: "#FFFFFF", icon: Sparkles },
+  { key: "history", name: "History", hex: "#F4CF3A", textHex: "#1D1B1A", icon: Landmark },
+  { key: "famous", name: "Famous People & Events", hex: "#7DB33F", textHex: "#1D1B1A", icon: Users },
+  { key: "geography", name: "Geography", hex: "#2A6FBA", textHex: "#FFFFFF", icon: Globe },
+  { key: "business", name: "Business & Industry", hex: "#EE7A2E", textHex: "#1D1B1A", icon: Briefcase },
 ];
 
 const QUESTIONS = [
   // Culture, Recreation & Education
-  { id: 1, category: "culture", question: "College of the Holy Cross, a Jesuit liberal arts college founded in 1843, sits atop which Worcester hill?", options: ["Mount St. James", "Bancroft Hill", "Chandler Hill", "Green Hill"], correctAnswer: "Mount St. James" },
-  { id: 2, category: "culture", question: "In 1909, Sigmund Freud delivered his only lectures in the United States at which Worcester university?", options: ["Clark University", "Worcester State University", "Assumption University", "Anna Maria College"], correctAnswer: "Clark University" },
-  { id: 3, category: "culture", question: "With land purchases beginning in 1854, which Worcester park is considered one of the first in the U.S. acquired with public funds?", options: ["Elm Park", "Green Hill Park", "Institute Park", "Newton Hill"], correctAnswer: "Elm Park" },
+  {
+    id: 1,
+    category: "culture",
+    question: "What Worcester-born, well-known, multi-instrumental musician, arranger, and composer was the subject of the short documentary film Anything for Jazz?",
+    options: ["Duke Ellington", "John Coltrane", "Jaki Byard", "Charlie Parker", "Ornette Coleman"],
+    correctAnswer: "Jaki Byard",
+    explanation: "Jaki Byard was born in Worcester in 1922 and could play piano, saxophone, trumpet, and more. He recorded with Charles Mingus, Eric Dolphy, and Roland Kirk, and taught for years at the New England Conservatory. The 1980 short documentary Anything for Jazz is a portrait of him.",
+  },
   // Potpourri
-  { id: 4, category: "potpourri", question: "In 1963, Worcester graphic artist Harvey Ball designed which now-famous image for an insurance company?", options: ["The smiley face", "The peace sign", "The recycling symbol", "The thumbs-up icon"], correctAnswer: "The smiley face" },
-  { id: 5, category: "potpourri", question: "Worcester native Esther Howland is known as the \"Mother of the American\" what, for pioneering mass-produced greeting cards in the 1840s?", options: ["Valentine", "Christmas card", "Postcard", "Birthday card"], correctAnswer: "Valentine" },
-  { id: 6, category: "potpourri", question: "Thanks to its central location within Massachusetts, Worcester is nicknamed the:", options: ["Heart of the Commonwealth", "Hub of the Universe", "Gateway City", "City of Champions"], correctAnswer: "Heart of the Commonwealth" },
+  {
+    id: 2,
+    category: "potpourri",
+    question: "Which Worcester restaurant was visited by celebrities including Al Pacino, Rodney Dangerfield, Frank Sinatra, and Bette Midler?",
+    options: ["Pilgrim Oyster House", "Aku-Aku", "The Odyssey", "Rovezzi's", "El Morocco"],
+    correctAnswer: "El Morocco",
+    explanation: "El Morocco, a Lebanese-American restaurant on a hill off Wall Street, was a Worcester institution for decades. Stars performing in central Massachusetts made a point of stopping in for dinner.",
+  },
   // History
-  { id: 7, category: "history", question: "In what year was Worcester officially incorporated as a city?", options: ["1848", "1776", "1900", "1620"], correctAnswer: "1848" },
-  { id: 8, category: "history", question: "Worcester printer and Revolutionary War figure Isaiah Thomas founded which historical society still headquartered in the city?", options: ["American Antiquarian Society", "Massachusetts Historical Society", "Smithsonian Institution", "National Archives"], correctAnswer: "American Antiquarian Society" },
-  { id: 9, category: "history", question: "What is the name of the catastrophic February 1978 snowstorm that paralyzed Worcester and New England?", options: ["The Blizzard of '78", "Hurricane Carol", "The Great Ice Storm", "Snowmageddon"], correctAnswer: "The Blizzard of '78" },
+  {
+    id: 3,
+    category: "history",
+    question: "In what year was Worcester officially incorporated as a city?",
+    options: ["1848", "1776", "1900", "1620"],
+    correctAnswer: "1848",
+    explanation: "Worcester was incorporated as a town in 1722. By the 1840s, the canal, the railroads, and new factories had grown its population so quickly that it received a city charter in 1848.",
+  },
+  {
+    id: 4,
+    category: "history",
+    question: "Worcester printer and Revolutionary War figure Isaiah Thomas founded which historical society still headquartered in the city?",
+    options: ["American Antiquarian Society", "Massachusetts Historical Society", "Smithsonian Institution", "National Archives"],
+    correctAnswer: "American Antiquarian Society",
+    explanation: "Isaiah Thomas founded the American Antiquarian Society in 1812, starting with his own collection of books and newspapers. Today its library on Salisbury Street holds one of the largest collections of early American printed material in the world.",
+  },
+  {
+    id: 5,
+    category: "history",
+    question: "What is the name of the catastrophic February 1978 snowstorm that paralyzed Worcester and New England?",
+    options: ["The Blizzard of '78", "Hurricane Carol", "The Great Ice Storm", "Snowmageddon"],
+    correctAnswer: "The Blizzard of '78",
+    explanation: "The Blizzard of '78 dropped more than two feet of snow on much of southern New England. Thousands of drivers were stranded on the highways, and Governor Michael Dukakis banned non-emergency travel for days while crews dug out.",
+  },
   // Famous People & Events
-  { id: 10, category: "famous", question: "Worcester-born Robert H. Goddard, the father of modern rocketry, launched the first liquid-fueled rocket in 1926 in which nearby town?", options: ["Auburn", "Shrewsbury", "Leicester", "Holden"], correctAnswer: "Auburn" },
-  { id: 11, category: "famous", question: "Worcester-born activist Abbie Hoffman co-founded which 1960s countercultural political group?", options: ["The Yippies (Youth International Party)", "The Black Panthers", "Students for a Democratic Society", "The Weather Underground"], correctAnswer: "The Yippies (Youth International Party)" },
-  { id: 12, category: "famous", question: "In 1850, Worcester hosted the first national convention dedicated to which cause?", options: ["Women's rights", "Abolition of slavery", "Labor unions", "Temperance"], correctAnswer: "Women's rights" },
+  {
+    id: 6,
+    category: "famous",
+    question: "What U.S. President delivered commencement addresses at both Clark University and the College of the Holy Cross?",
+    options: ["Teddy Roosevelt", "Bill Clinton", "Dwight D. Eisenhower", "Woodrow Wilson", "Harry S. Truman"],
+    correctAnswer: "Teddy Roosevelt",
+    explanation: "Theodore Roosevelt gave both commencement addresses in June 1905, on a single visit to Worcester while he was serving as president.",
+  },
   // Geography
-  { id: 13, category: "geography", question: "As the crow flies, roughly how far is Worcester from Boston?", options: ["About 40 miles", "About 90 miles", "About 120 miles", "About 15 miles"], correctAnswer: "About 40 miles" },
-  { id: 14, category: "geography", question: "Which lake forms part of Worcester's eastern border with Shrewsbury and hosts collegiate rowing regattas?", options: ["Lake Quinsigamond", "Lake Winnipesaukee", "Walden Pond", "Indian Lake"], correctAnswer: "Lake Quinsigamond" },
-  { id: 15, category: "geography", question: "Worcester's hilly terrain has earned it a comparison to Rome for being built across how many hills?", options: ["Seven", "Three", "Twelve", "Five"], correctAnswer: "Seven" },
+  {
+    id: 7,
+    category: "geography",
+    question: "In 1929, the Salisbury Mansion was moved from which Worcester location to its current home on Highland Street in Worcester?",
+    options: ["Tatnuck Square", "Lincoln Square", "Newton Square", "Federal Square", "Kelley Square"],
+    correctAnswer: "Lincoln Square",
+    explanation: "Merchant Stephen Salisbury built the mansion in 1772 next to his store in Lincoln Square. It was moved to Highland Street in 1929, and today it is a historic house museum run by the Museum of Worcester.",
+  },
   // Business & Industry
-  { id: 16, category: "business", question: "Due to 19th-century wire manufacturers like Washburn & Moen, Worcester earned which industrial nickname?", options: ["The Wire City", "The Steel City", "Nail City", "The Iron Capital"], correctAnswer: "The Wire City" },
-  { id: 17, category: "business", question: "Founded in Worcester in 1882 and still headquartered there, which company is famous for ginger ale and seltzer?", options: ["Polar Beverages", "Moxie", "Coca-Cola", "Nantucket Nectars"], correctAnswer: "Polar Beverages" },
-  { id: 18, category: "business", question: "Table Talk Pies, famous for individually-wrapped snack pies, was founded in Worcester in what year?", options: ["1924", "1899", "1950", "1975"], correctAnswer: "1924" },
+  {
+    id: 8,
+    category: "business",
+    question: "On April 16, 1841, Loring Coes was granted a patent for what Worcester invention that is now found in nearly everyone's toolbox?",
+    options: ["Phillips head screwdriver", "Flat nose pliers", "Claw hammer", "Monkey wrench", "Coping saw"],
+    correctAnswer: "Monkey wrench",
+    explanation: "Loring Coes patented an adjustable screw wrench that could be fitted to nuts of many sizes. He and his brother Aury built the Coes Wrench Company around it, and Coes wrenches were made in Worcester for generations.",
+  },
 ];
 
 const DISPLAY_FONT = "'Arial Black', 'Helvetica Neue', Arial, sans-serif";
@@ -97,9 +145,9 @@ const ANIMATION_CSS = `
     to { opacity: 1; transform: scale(1); }
   }
   @keyframes wedge-win {
-    0% { transform: scale(0.4); opacity: 0; filter: drop-shadow(0 0 0 rgba(201,151,63,0)); }
-    55% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 8px rgba(201,151,63,0.85)); }
-    100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 0 rgba(201,151,63,0)); }
+    0% { transform: scale(0.4); opacity: 0; filter: drop-shadow(0 0 0 rgba(232,176,75,0)); }
+    55% { transform: scale(1.1); opacity: 1; filter: drop-shadow(0 0 8px rgba(232,176,75,0.85)); }
+    100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 0 rgba(232,176,75,0)); }
   }
   @keyframes win-pop {
     0% { transform: scale(0.6); opacity: 0; }
@@ -146,11 +194,11 @@ const ANIMATION_CSS = `
   }
   .streak-hot { animation: streak-glow 1.6s ease-in-out infinite; }
   @keyframes streak-glow {
-    0%, 100% { box-shadow: 0 0 6px rgba(249,115,22,0.35); }
-    50% { box-shadow: 0 0 14px rgba(249,115,22,0.65); }
+    0%, 100% { box-shadow: 0 0 6px rgba(232,176,75,0.35); }
+    50% { box-shadow: 0 0 14px rgba(232,176,75,0.7); }
   }
-  .brass-btn { position: relative; overflow: hidden; }
-  .brass-btn::after {
+  .shine-btn { position: relative; overflow: hidden; }
+  .shine-btn::after {
     content: "";
     position: absolute;
     top: 0;
@@ -161,7 +209,7 @@ const ANIMATION_CSS = `
     transform: skewX(-20deg);
     transition: left 0.55s ease;
   }
-  .brass-btn:hover::after { left: 130%; }
+  .shine-btn:hover::after { left: 130%; }
   .confetti-piece {
     position: absolute;
     top: -6%;
@@ -208,7 +256,7 @@ function PlayerToken({ wedges, size = 220, justWonKey = null, stagger = false })
   const r = 92;
   return (
     <svg viewBox="0 0 200 200" width={size} height={size} className="drop-shadow-lg">
-      <circle cx={cx} cy={cy} r={r + 5} fill="#c9973f" />
+      <circle cx={cx} cy={cy} r={r + 5} fill="#1D1B1A" />
       {CATEGORIES.map((cat, i) => {
         const start = i * 60;
         const end = start + 60;
@@ -229,22 +277,22 @@ function PlayerToken({ wedges, size = 220, justWonKey = null, stagger = false })
             className={cls}
             style={style}
             d={wedgePath(cx, cy, r, start, end)}
-            fill={won ? cat.hex : "#2a3f36"}
-            stroke="#c9973f"
+            fill={won ? cat.hex : "#3A3634"}
+            stroke="#1D1B1A"
             strokeWidth="2.5"
             opacity={won ? 1 : 0.6}
           />
         );
       })}
-      <circle cx={cx} cy={cy} r={22} fill="#c9973f" stroke="#241a10" strokeWidth="2" />
-      <circle cx={cx} cy={cy} r={22} fill="none" stroke="#f3e9d2" strokeWidth="1" opacity="0.5" />
+      <circle cx={cx} cy={cy} r={22} fill="#E3202C" stroke="#1D1B1A" strokeWidth="2" />
+      <circle cx={cx} cy={cy} r={22} fill="none" stroke="#FAF9F7" strokeWidth="1" opacity="0.5" />
     </svg>
   );
 }
 
 function Confetti() {
   if (prefersReducedMotion) return null;
-  const colors = CATEGORIES.map((c) => c.hex).concat(["#c9973f"]);
+  const colors = CATEGORIES.map((c) => c.hex).concat(["#E8B04B", "#E3202C"]);
   const pieces = Array.from({ length: 26 }, (_, i) => ({
     id: i,
     left: `${(Math.random() * 100).toFixed(1)}%`,
@@ -350,46 +398,44 @@ export default function TriviaGame() {
   return (
     <div
       className="min-h-screen w-full flex items-center justify-center p-4 sm:p-8"
-      style={{ background: "radial-gradient(ellipse at center, #234a3a 0%, #163025 65%, #0f231b 100%)" }}
+      style={{ background: "radial-gradient(ellipse at center, #2A2726 0%, #1D1B1A 70%)" }}
     >
       <style>{ANIMATION_CSS}</style>
       <div className="w-full max-w-md">
         {view === "home" && (
           <header className="text-center mb-6">
-            <p className="fade-down uppercase tracking-[0.3em] text-[#c9973f] text-xs font-bold mb-1" style={{ fontFamily: LABEL_FONT }}>
-              Worcester Historical Museum Presents
-            </p>
-            <h1
-              className="fade-down-delay text-3xl sm:text-4xl text-[#f3e9d2] uppercase tracking-tight"
-              style={{ fontFamily: DISPLAY_FONT, textShadow: "2px 2px 0 #0f231b" }}
-            >
-              Worcester Trivia
+            <h1 className="fade-down">
+              <img
+                src={logo}
+                alt="Worcester Trivia, presented by the Museum of Worcester"
+                className="mx-auto w-full max-w-[22rem]"
+              />
             </h1>
           </header>
         )}
 
         {view === "home" && (
-          <div className="panel-in flex flex-col items-center gap-6 bg-[#f3e9d2] border-4 border-[#c9973f] rounded-2xl px-5 py-8 sm:px-6 sm:py-10 shadow-2xl">
+          <div className="panel-in flex flex-col items-center gap-6 bg-bone border-4 border-worcester-red rounded-2xl px-5 py-8 sm:px-6 sm:py-10 shadow-2xl">
             <PlayerToken wedges={wedges} justWonKey={justWonKey} />
             <div className="flex flex-col items-center gap-2">
-              <p className="text-[#241a10] font-bold text-lg" style={{ fontFamily: LABEL_FONT }}>
+              <p className="text-ink font-bold text-lg" style={{ fontFamily: LABEL_FONT }}>
                 {wonCount} / 6 wedges collected
               </p>
               <div className="flex items-center justify-center gap-2 flex-wrap">
                 <span
                   key={streakTick}
                   className={`streak-badge inline-flex items-center gap-1.5 rounded-full border-2 px-3 py-1 ${
-                    streak > 0 ? "border-orange-500 bg-orange-50" : "border-[#241a10]/15 bg-[#faf4e6]"
+                    streak > 0 ? "border-gold bg-gold/15" : "border-ink/15 bg-white"
                   } ${streak >= 3 && !prefersReducedMotion ? "streak-hot" : ""} ${!prefersReducedMotion ? "streak-pop" : ""}`}
                 >
                   <Flame
                     size={15}
                     strokeWidth={2.5}
-                    className={streak > 0 ? "text-orange-500" : "text-[#241a10]/30"}
+                    className={streak > 0 ? "text-gold" : "text-stone"}
                     fill={streak > 0 ? "currentColor" : "none"}
                   />
                   <span
-                    className={`font-bold text-sm ${streak > 0 ? "text-orange-700" : "text-[#241a10]/40"}`}
+                    className={`font-bold text-sm ${streak > 0 ? "text-ink" : "text-stone"}`}
                     style={{ fontFamily: LABEL_FONT }}
                   >
                     {streak} Streak
@@ -397,7 +443,7 @@ export default function TriviaGame() {
                 </span>
                 {bestStreak > 1 && (
                   <span
-                    className="text-[#241a10]/45 text-xs font-semibold uppercase tracking-wide"
+                    className="text-slate text-xs font-semibold uppercase tracking-wide"
                     style={{ fontFamily: LABEL_FONT }}
                   >
                     Best {bestStreak}
@@ -407,7 +453,7 @@ export default function TriviaGame() {
             </div>
             <div className="w-full">
               <p
-                className="fade-down text-[#241a10]/70 text-xs uppercase tracking-[0.25em] font-bold text-center mb-3"
+                className="fade-down text-slate text-xs uppercase tracking-[0.25em] font-bold text-center mb-3"
                 style={{ fontFamily: LABEL_FONT }}
               >
                 Choose a Category
@@ -423,11 +469,11 @@ export default function TriviaGame() {
                       onClick={() => drawCard(cat)}
                       disabled={!!drawingKey}
                       aria-label={`Draw a ${cat.name} question`}
-                      className={`brass-btn fade-up relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-[#241a10]/25 px-3 py-5 shadow-md transition hover:-translate-y-0.5 active:scale-[0.97] disabled:cursor-default ${cat.bg} ${cat.text} ${isPicking ? "tile-pick" : ""} ${isDimmed ? "tile-dim" : ""}`}
-                      style={{ fontFamily: LABEL_FONT, animationDelay: `${0.05 + i * 0.05}s` }}
+                      className={`shine-btn fade-up relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-ink/25 px-3 py-5 shadow-md transition hover:-translate-y-0.5 active:scale-[0.97] disabled:cursor-default ${isPicking ? "tile-pick" : ""} ${isDimmed ? "tile-dim" : ""}`}
+                      style={{ fontFamily: LABEL_FONT, animationDelay: `${0.05 + i * 0.05}s`, backgroundColor: cat.hex, color: cat.textHex }}
                     >
                       {won && (
-                        <span className="absolute top-1.5 right-1.5 bg-[#f3e9d2] text-[#241a10] rounded-full p-0.5 shadow">
+                        <span className="absolute top-1.5 right-1.5 bg-bone text-ink rounded-full p-0.5 shadow">
                           <CheckCircle2 size={14} strokeWidth={3} />
                         </span>
                       )}
@@ -445,10 +491,13 @@ export default function TriviaGame() {
 
         {(view === "question" || view === "result") && currentQuestion && currentCategory && (
           <div
-            className="deal-in bg-[#f3e9d2] border-4 border-[#241a10] rounded-lg shadow-2xl overflow-hidden"
+            className="deal-in bg-bone border-4 border-ink rounded-lg shadow-2xl overflow-hidden"
             style={{ transform: "rotate(-0.6deg)" }}
           >
-            <div className={`${currentCategory.bg} ${currentCategory.text} px-5 py-4 flex items-center gap-3`}>
+            <div
+              className="px-5 py-4 flex items-center gap-3"
+              style={{ backgroundColor: currentCategory.hex, color: currentCategory.textHex }}
+            >
               <currentCategory.icon size={26} strokeWidth={2.5} />
               <span className="uppercase tracking-wider font-bold text-lg" style={{ fontFamily: DISPLAY_FONT }}>
                 {currentCategory.name}
@@ -456,7 +505,7 @@ export default function TriviaGame() {
             </div>
 
             <div className="px-6 py-6">
-              <p className="text-[#241a10] text-xl leading-snug mb-6" style={{ fontFamily: SERIF_FONT }}>
+              <p className="text-ink text-xl leading-snug mb-6" style={{ fontFamily: SERIF_FONT }}>
                 {currentQuestion.question}
               </p>
 
@@ -465,17 +514,17 @@ export default function TriviaGame() {
                   const isSelected = selectedAnswer === option;
                   const isTheCorrectAnswer = option === currentQuestion.correctAnswer;
 
-                  let stateClasses = "bg-white border-[#241a10]/20 text-[#241a10] hover:border-[#c9973f] hover:bg-[#faf4e6]";
+                  let stateClasses = "bg-white border-ink/20 text-ink hover:border-worcester-red hover:bg-bone";
                   let motionClass = "";
                   if (view === "result") {
                     if (isTheCorrectAnswer) {
-                      stateClasses = "bg-green-100 border-green-600 text-green-900";
+                      stateClasses = "bg-correct/15 border-correct text-ink";
                       motionClass = "option-pop";
                     } else if (isSelected && !isCorrect) {
-                      stateClasses = "bg-red-100 border-red-600 text-red-900";
+                      stateClasses = "bg-incorrect/10 border-incorrect text-ink";
                       motionClass = "option-shake";
                     } else {
-                      stateClasses = "bg-white border-[#241a10]/10 text-[#241a10]/50";
+                      stateClasses = "bg-white border-ink/10 text-stone";
                     }
                   }
 
@@ -488,8 +537,8 @@ export default function TriviaGame() {
                       style={{ fontFamily: LABEL_FONT }}
                     >
                       <span>{option}</span>
-                      {view === "result" && isTheCorrectAnswer && <CheckCircle2 size={20} className="mark-pop text-green-600 shrink-0" />}
-                      {view === "result" && isSelected && !isCorrect && <XCircle size={20} className="mark-pop text-red-600 shrink-0" />}
+                      {view === "result" && isTheCorrectAnswer && <CheckCircle2 size={20} className="mark-pop text-correct shrink-0" />}
+                      {view === "result" && isSelected && !isCorrect && <XCircle size={20} className="mark-pop text-incorrect shrink-0" />}
                     </button>
                   );
                 })}
@@ -498,19 +547,38 @@ export default function TriviaGame() {
               {view === "result" && (
                 <div className="mt-6">
                   <p
-                    className={`fade-up font-bold text-lg mb-4 ${isCorrect ? "text-green-700" : "text-red-700"}`}
+                    className="fade-up flex items-center gap-2 font-bold text-lg text-ink mb-4"
                     style={{ fontFamily: DISPLAY_FONT }}
                   >
+                    {isCorrect ? (
+                      <CheckCircle2 size={22} strokeWidth={2.75} className="text-correct shrink-0" />
+                    ) : (
+                      <XCircle size={22} strokeWidth={2.75} className="text-incorrect shrink-0" />
+                    )}
                     {isCorrect ? "Correct! Wedge earned." : "Not quite."}
                   </p>
                   {!isCorrect && (
-                    <p className="fade-up-delay-1 text-[#241a10]/80 mb-4" style={{ fontFamily: SERIF_FONT }}>
-                      The correct answer was <strong>{currentQuestion.correctAnswer}</strong>.
+                    <p className="fade-up-delay-1 text-slate mb-4" style={{ fontFamily: SERIF_FONT }}>
+                      The correct answer was <strong className="text-ink">{currentQuestion.correctAnswer}</strong>.
                     </p>
+                  )}
+                  {currentQuestion.explanation && (
+                    <div className="fade-up-delay-1 mb-5 rounded-r-lg border-l-4 border-gold bg-gold/15 px-4 py-3">
+                      <p
+                        className="flex items-center gap-1.5 text-ink text-xs font-bold uppercase tracking-[0.2em] mb-1.5"
+                        style={{ fontFamily: LABEL_FONT }}
+                      >
+                        <Lightbulb size={14} strokeWidth={2.5} />
+                        Did you know?
+                      </p>
+                      <p className="text-ink/85 text-[0.95rem] leading-relaxed" style={{ fontFamily: SERIF_FONT }}>
+                        {currentQuestion.explanation}
+                      </p>
+                    </div>
                   )}
                   <button
                     onClick={nextTurn}
-                    className="fade-up-delay-2 w-full bg-[#241a10] hover:bg-[#3a2a1a] active:scale-[0.98] text-[#f3e9d2] font-bold uppercase tracking-wide px-6 py-3 rounded-lg transition"
+                    className="fade-up-delay-2 w-full bg-worcester-red hover:bg-brick active:scale-[0.98] text-bone font-bold uppercase tracking-wide px-6 py-3 rounded-lg transition"
                     style={{ fontFamily: DISPLAY_FONT }}
                   >
                     Next Turn
@@ -522,19 +590,19 @@ export default function TriviaGame() {
         )}
 
         {view === "win" && (
-          <div className="panel-in relative flex flex-col items-center gap-6 bg-[#f3e9d2] border-4 border-[#c9973f] rounded-2xl px-6 py-10 shadow-2xl text-center">
+          <div className="panel-in relative flex flex-col items-center gap-6 bg-bone border-4 border-worcester-red rounded-2xl px-6 py-10 shadow-2xl text-center">
             <Confetti />
-            <PartyPopper size={40} className="win-pop text-[#c9973f]" />
-            <h2 className="win-pop-delay text-2xl uppercase text-[#241a10] tracking-tight" style={{ fontFamily: DISPLAY_FONT }}>
+            <PartyPopper size={40} className="win-pop text-gold" />
+            <h2 className="win-pop-delay text-2xl uppercase text-ink tracking-tight" style={{ fontFamily: DISPLAY_FONT }}>
               You Win!
             </h2>
-            <p className="text-[#241a10]/80" style={{ fontFamily: SERIF_FONT }}>
+            <p className="text-slate" style={{ fontFamily: SERIF_FONT }}>
               You've claimed all six wedges and captured the Heart of the Commonwealth.
             </p>
             <PlayerToken wedges={wedges} size={180} stagger />
             <button
               onClick={resetGame}
-              className="brass-btn inline-flex items-center gap-2 bg-[#c9973f] hover:bg-[#b5852f] active:scale-[0.98] text-[#241a10] font-bold uppercase tracking-wide px-6 py-3 rounded-lg transition"
+              className="shine-btn inline-flex items-center gap-2 bg-worcester-red hover:bg-brick active:scale-[0.98] text-bone font-bold uppercase tracking-wide px-6 py-3 rounded-lg transition"
               style={{ fontFamily: DISPLAY_FONT }}
             >
               <RotateCcw size={18} strokeWidth={2.5} />

@@ -19,7 +19,9 @@ import { supabase } from "./supabaseClient";
 import { fallbackCategories, fallbackQuestions } from "../data/fallbackQuestions";
 import type { CategoryRow, GameData, Question, QuestionRow } from "../types/trivia";
 
-const CACHE_KEY = "trivia_cache_v1";
+// Bumped from v1 when questions gained option_e/explanation, so devices
+// that synced the old question set don't keep serving it offline.
+const CACHE_KEY = "trivia_cache_v2";
 
 interface CachedPayload {
   categories: CategoryRow[];
@@ -32,16 +34,22 @@ const ANSWER_INDEX: Record<QuestionRow["correct_option"], number> = {
   B: 1,
   C: 2,
   D: 3,
+  E: 4,
 };
 
 export function normalizeQuestion(row: QuestionRow): Question {
-  const options = [row.option_a, row.option_b, row.option_c, row.option_d];
+  const columns = [row.option_a, row.option_b, row.option_c, row.option_d, row.option_e];
+  // Resolve the answer before dropping blank columns, so the letter always
+  // points at the column the editor picked.
+  const correctAnswer = columns[ANSWER_INDEX[row.correct_option]] ?? "";
+  const options = columns.filter((o): o is string => !!o && o.trim() !== "");
   return {
     id: row.id,
     category: row.category_key,
     question: row.question,
     options,
-    correctAnswer: options[ANSWER_INDEX[row.correct_option]],
+    correctAnswer,
+    explanation: row.explanation?.trim() || null,
   };
 }
 

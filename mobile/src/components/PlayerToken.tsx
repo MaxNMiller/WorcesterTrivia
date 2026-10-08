@@ -20,6 +20,7 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import type { CategoryRow } from "../types/trivia";
+import { colors } from "../theme/colors";
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
@@ -87,8 +88,8 @@ function Wedge({ d, color, won, centerX, centerY, animate, staggerIndex }: Wedge
   return (
     <AnimatedPath
       d={d}
-      fill={won ? color : "#2a3f36"}
-      stroke="#c9973f"
+      fill={won ? color : colors.slate}
+      stroke={colors.ink}
       strokeWidth={2.5}
       animatedProps={animatedProps}
     />
@@ -117,7 +118,7 @@ export function PlayerToken({
 
   return (
     <Svg viewBox="0 0 200 200" width={size} height={size}>
-      <Circle cx={cx} cy={cy} r={r + 5} fill="#c9973f" />
+      <Circle cx={cx} cy={cy} r={r + 5} fill={colors.ink} />
       {categories.map((cat, i) => {
         const start = i * slice;
         const end = start + slice;
@@ -143,8 +144,8 @@ export function PlayerToken({
           />
         );
       })}
-      <Circle cx={cx} cy={cy} r={22} fill="#c9973f" stroke="#241a10" strokeWidth={2} />
-      <Circle cx={cx} cy={cy} r={22} fill="none" stroke="#f3e9d2" strokeWidth={1} opacity={0.5} />
+      <Circle cx={cx} cy={cy} r={22} fill={colors.worcesterRed} stroke={colors.ink} strokeWidth={2} />
+      <Circle cx={cx} cy={cy} r={22} fill="none" stroke={colors.bone} strokeWidth={1} opacity={0.5} />
     </Svg>
   );
 }

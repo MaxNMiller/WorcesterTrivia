@@ -69,7 +69,8 @@ or maintain.
 
 ## 4. Data schema
 
-See `../supabase/schema.sql` for the runnable DDL. Summary:
+See `../supabase/schema.sql` for the runnable DDL (and `../supabase/migrations/` to upgrade a
+project created from an earlier version). Summary:
 
 **`categories`**
 
@@ -77,7 +78,7 @@ See `../supabase/schema.sql` for the runnable DDL. Summary:
 |---|---|---|
 | `key` | text, PK | stable identifier, e.g. `"geography"` |
 | `name` | text | display name |
-| `color_hex` | text | e.g. `"#3b82f6"` |
+| `color_hex` | text | e.g. `"#2A6FBA"`; tile label color (Ink or white) is picked automatically for contrast |
 | `icon_name` | text | must match a `lucide-react-native` export name (e.g. `"Globe"`); unrecognized names fall back to a generic icon in the app rather than crashing |
 | `sort_order` | int | controls home-screen tile order |
 
@@ -88,13 +89,15 @@ See `../supabase/schema.sql` for the runnable DDL. Summary:
 | `id` | uuid, PK | auto-generated |
 | `category_key` | text, FK → `categories.key` | |
 | `question` | text | |
-| `option_a` .. `option_d` | text | four flat columns, not a JSON array — much easier for a non-technical editor to fill in a spreadsheet-style row than to hand-edit JSON |
-| `correct_option` | enum `'A' \| 'B' \| 'C' \| 'D'` | which of the four columns is correct — a dropdown/enum in the Table Editor, not free text, so it can never fail to match |
+| `option_a` .. `option_d` | text | four required flat columns, not a JSON array — much easier for a non-technical editor to fill in a spreadsheet-style row than to hand-edit JSON |
+| `option_e` | text, nullable | optional fifth choice; leave empty for a 4-option question |
+| `correct_option` | enum `'A' \| 'B' \| 'C' \| 'D' \| 'E'` | which column is correct — a dropdown/enum in the Table Editor, not free text, so it can never fail to match |
+| `explanation` | text, nullable | "Did you know?" blurb shown after the player answers (right or wrong) |
 | `is_active` | boolean, default true | lets editors retire a bad question without deleting history |
 | `created_at` / `updated_at` | timestamptz | `updated_at` auto-maintained by a trigger |
 
 The app's `normalizeQuestion()` (in `src/services/questionsService.ts`) converts a
-`QuestionRow` into the `{ id, category, question, options: string[], correctAnswer }` shape the
+`QuestionRow` into the `{ id, category, question, options: string[], correctAnswer, explanation }` shape the
 game hook already expects — this is the one place the CMS's flat-columns shape and the game's
 array shape are bridged, so a schema change only ever touches one function.
 
@@ -113,7 +116,7 @@ strategy in `src/services/questionsService.ts` (`loadGameData()`):
    cache, return them.
 3. **Offline, or the fetch failed:** return whatever was last cached.
 4. **No network and no cache yet** (first-ever launch with no connectivity): fall back to
-   `src/data/fallbackQuestions.ts` — the same 18 starter questions the Supabase project is
+   `src/data/fallbackQuestions.ts` — the same 8 starter questions the Supabase project is
    seeded with — so the app is playable the moment it's installed, before it's ever synced.
 
 `forceRefresh()` clears the cache and re-fetches; wire this to a "Refresh Questions" action

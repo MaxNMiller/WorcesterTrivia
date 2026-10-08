@@ -7,10 +7,11 @@
  *
  * `Question` is the normalized in-app shape the game logic consumes,
  * matching what the existing web app (TriviaGame.jsx) already expects:
- * `{ options: string[], correctAnswer: string }`.
+ * `{ options: string[], correctAnswer: string }`, plus the optional
+ * `explanation` blurb shown after every answer.
  */
 
-export type AnswerLetter = "A" | "B" | "C" | "D";
+export type AnswerLetter = "A" | "B" | "C" | "D" | "E";
 
 export interface CategoryRow {
   key: string;
@@ -28,7 +29,11 @@ export interface QuestionRow {
   option_b: string;
   option_c: string;
   option_d: string;
+  /** Optional fifth choice - leave empty for a 4-option question. */
+  option_e: string | null;
   correct_option: AnswerLetter;
+  /** "Did you know?" blurb shown after the player answers. */
+  explanation: string | null;
   is_active: boolean;
 }
 
@@ -38,6 +43,7 @@ export interface Question {
   question: string;
   options: string[];
   correctAnswer: string;
+  explanation: string | null;
 }
 
 export interface GameData {

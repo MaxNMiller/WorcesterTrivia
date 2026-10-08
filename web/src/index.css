@@ -1,11 +1,25 @@
 @import "tailwindcss";
 
+@theme {
+  --color-worcester-red: #E3202C;
+  --color-brick: #B5121D;
+  --color-ink: #1D1B1A;
+  --color-bone: #FAF9F7;
+  --color-charcoal: #2A2726;
+  --color-slate: #3A3634;
+  --color-stone: #A39D98;
+  --color-correct: #3FA66B;
+  --color-incorrect: #B5121D;
+  --color-gold: #E8B04B;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
+  background: #1D1B1A;
 }
 
 #root {

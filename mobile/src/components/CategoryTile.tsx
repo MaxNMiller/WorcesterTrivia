@@ -9,7 +9,9 @@
  *
  * `category.icon_name` is a CMS-editable string (see supabase/schema.sql)
  * looked up against the lucide-react-native icon set at render time, with
- * a safe fallback if an editor ever typos an icon name.
+ * a safe fallback if an editor ever typos an icon name. The label/icon
+ * color is picked from the tile color (readableTextOn) for the same reason:
+ * an editor can choose any color without making the label unreadable.
  */
 import React, { useEffect } from "react";
 import { Pressable, Text, View } from "react-native";
@@ -23,6 +25,7 @@ import Animated, {
 import * as LucideIcons from "lucide-react-native";
 import { CheckCircle2, HelpCircle } from "lucide-react-native";
 import type { CategoryRow } from "../types/trivia";
+import { colors, readableTextOn } from "../theme/colors";
 
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
@@ -78,6 +81,7 @@ export function CategoryTile({
 
   const iconComponents = LucideIcons as unknown as Record<string, typeof HelpCircle>;
   const Icon = iconComponents[category.icon_name] ?? HelpCircle;
+  const textColor = readableTextOn(category.color_hex);
 
   return (
     <AnimatedPressable
@@ -89,12 +93,15 @@ export function CategoryTile({
       className="relative flex-1 basis-[47%] items-center justify-center gap-2 rounded-xl border-2 border-ink/25 px-3 py-5"
     >
       {won && (
-        <View className="absolute right-1.5 top-1.5 rounded-full bg-parchment p-0.5">
-          <CheckCircle2 size={14} strokeWidth={3} color="#241a10" />
+        <View className="absolute right-1.5 top-1.5 rounded-full bg-bone p-0.5">
+          <CheckCircle2 size={14} strokeWidth={3} color={colors.ink} />
         </View>
       )}
-      <Icon size={26} strokeWidth={2.25} color="#ffffff" />
-      <Text className="text-center text-xs font-bold uppercase tracking-wide text-white">
+      <Icon size={26} strokeWidth={2.25} color={textColor} />
+      <Text
+        className="text-center text-xs font-bold uppercase tracking-wide"
+        style={{ color: textColor }}
+      >
         {category.name}
       </Text>
     </AnimatedPressable>
